@@ -1,26 +1,54 @@
-Flotr2 Graph Widget - User's Manual
-===================================
+Flotr2 Graph Widget - Programmer's Manual
+=========================================
 
-Introduction
+Description
 ------------
+This widget allows you to create any graph supported by flotr2.
 
-This widget allows you to create any graph supported by flotr2. See [the flotr2 examples page](http://www.humblesoftware.com/flotr2/index) for more info about what kind of graphics you can obtain using this widget.
+For more information about flotr2 and what kind of graphics you can obtain using this widget, see [the flotr2 examples page](http://www.humblesoftware.com/flotr2/index).
 
-Wiring
-------
+
+Configurations
+--------------
+
+#### **Preferences**
+This widget has not preferences.
+
+#### **Wiring**
 
 Input Endpoints:
 
-* **Data in**: .
+* **Data in**: Gets the data and settings graph (linear, bar, pie, ...) to draw with the widget.
 
 Output Endpoints:
 
-* This widget has not output endpoint
+* This widget has not output endpoint.
+
 
 Examples
 --------
 
-Vertical bars:
+Linear Graph (with selection support):
+
+    :::json
+    {
+        "config": {
+            "selection": {
+                "mode": "x",
+                "fps": 30
+            },
+            "yaxis": {
+                "min": 0,
+                "autoscaleMargin": 1
+            }
+        },
+        "data": {
+            "0": [[0, 6], [1, 10], [2, 3], [3, 9]],
+            "1": [[0.5, 8], [1.5, 10], [2.5, 2], [3.5, 10]]
+        }
+    }
+
+Vertical Bars Graph:
 
     :::json
     {
@@ -50,7 +78,7 @@ Vertical bars:
         }
     }
 
-Horizontal Bars with legend and custom colors:
+Horizontal Bars Graph (with legend and custom colors):
 
     :::json
     {
@@ -85,22 +113,3 @@ Horizontal Bars with legend and custom colors:
         }
     }
 
-Linear Graph with selection support:
-
-    :::json
-    {
-        "config": {
-            "selection": {
-                "mode": "x", 
-                "fps": 30
-            },
-            "yaxis": {
-                "min": 0,
-                "autoscaleMargin": 1
-            }
-        },
-        "data": {
-            "0": [[0, 6], [1, 10], [2, 3], [3, 9]],
-            "1": [[0.5, 8], [1.5, 10], [2.5, 2], [3.5, 10]]
-        }
-    }
