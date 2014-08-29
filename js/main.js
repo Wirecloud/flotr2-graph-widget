@@ -127,7 +127,9 @@
             hasChanged = true;
         }
 
-        draw_graph();
+        if (hasChanged) {
+            draw_graph();
+        }
     });
 
     window.addEventListener('load', function () {
