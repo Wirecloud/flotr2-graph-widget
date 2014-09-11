@@ -10,6 +10,7 @@
         <image>images/catalogue.png</image>
         <description>This widget allows you to create any graph supported by flotr2.</description>
         <longdescription>DESCRIPTION.md</longdescription>
+        <changelog>CHANGELOG.md</changelog>
         <doc>doc/index.md</doc>
         <license>Apache License 2.0</license>
         <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
