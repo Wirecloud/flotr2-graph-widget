@@ -1,0 +1,14 @@
+{
+  "name": "flotr2-graph-widget",
+  "dependencies": {
+    "flotr2": "*"
+  },
+  "exportsOverride": {
+    "flotr2": {
+      "js": "flotr2.min.js"
+    }
+  },
+  "devDependencies": {
+    "jasmine-jquery": "2.0.6"
+  }
+}
