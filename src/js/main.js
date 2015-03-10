@@ -97,8 +97,6 @@
     };
 
     var process_new_data = function process_new_data(new_data) {
-        var ds;
-
         for (var key in new_data) {
             if (!(key in data)) {
                 data[key] = {data: new_data[key]};
