@@ -152,7 +152,6 @@ module.exports = function (grunt) {
               specs: 'src/test/js/*Spec.js',
               helpers: ['src/test/helpers/*.js'],
               vendor: ['bower_components/jquery/dist/jquery.js',
-                'bower_components/bootstrap/dist/js/bootstrap.js',
                 'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
                 'src/test/vendor/*.js']
             }
