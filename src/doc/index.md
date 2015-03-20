@@ -1,34 +1,29 @@
-Flotr2 Graph Widget - Programmer's Manual
-=========================================
+Flotr2 Graph Widget
+===================
 
-Description
-------------
 This widget allows you to create any graph supported by flotr2.
 
 For more information about flotr2 and what kind of graphics you can obtain using this widget, see [the flotr2 examples page](http://www.humblesoftware.com/flotr2/index).
 
+## Configurations
 
-Configurations
---------------
+### Preferences
 
-#### **Preferences**
 This widget has not preferences.
 
-#### **Wiring**
+### Wiring
 
-Input Endpoints:
+#### Input Endpoints:
 
 * **Data in**: Gets the data and settings graph (linear, bar, pie, ...) to draw with the widget.
 
-Output Endpoints:
+#### Output Endpoints:
 
 * This widget has not output endpoint.
 
+## Examples
 
-Examples
---------
-
-Linear Graph (with selection support):
+* Linear Graph (with selection support):
 
     :::json
     {
@@ -48,7 +43,7 @@ Linear Graph (with selection support):
         }
     }
 
-Vertical Bars Graph:
+* Vertical Bars Graph:
 
     :::json
     {
@@ -78,7 +73,7 @@ Vertical Bars Graph:
         }
     }
 
-Horizontal Bars Graph (with legend and custom colors):
+* Horizontal Bars Graph (with legend and custom colors):
 
     :::json
     {
@@ -112,4 +107,3 @@ Horizontal Bars Graph (with legend and custom colors):
             "1": [[8, 0.5], [10, 1.5], [2, 2.5], [10, 3.5]]
         }
     }
-
