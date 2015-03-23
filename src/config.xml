@@ -1,23 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="flotr2-graph" version="0.98.2">
-
     <details>
         <title>Flotr2 Graph</title>
-        <homepage>https://github.com/Wirecloud/flotr2-graph</homepage>
-        <authors>Álvaro Arranz</authors>
-        <contributors>Iris Muñoz</contributors>
-        <email>aarranz@conwet.com</email>
+        <authors>Álvaro Arranz &lt;aarranz@conwet.com&gt;</authors>
+        <contributors>Iris Muñoz &lt;imunoz@conwet.com&gt;</contributors>
+        <email>wirecloud@conwet.com</email>
         <image>images/catalogue.png</image>
         <description>This widget allows you to create any graph supported by flotr2.</description>
+        <longdescription>DESCRIPTION.md</longdescription>
         <homepage>https://github.com/Wirecloud/flotr2-graph-widget</homepage>
         <doc>doc/index.md</doc>
         <changelog>doc/changelog.md</changelog>
     </details>
-
     <wiring>
         <inputendpoint name="input" type="text" label="Data in" description="Graph configuration and data values input. See the documentation for a more detailed description and examples" friendcode="floatr2-graph-data"/>
     </wiring>
-
     <contents src="index.html" contenttype="text/html" charset="utf-8" useplatformstyle="true"/>
     <rendering width="8" height="32"/>
 </widget>
