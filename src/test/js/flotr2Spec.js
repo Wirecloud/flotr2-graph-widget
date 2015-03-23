@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global $, test_methods*/
+/*global $, Flotr*/
 
 (function () {
 
@@ -101,7 +101,7 @@
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("", function() {
+        it("handles correctly events comming from the input endpoint (passing config, datasets and data by separately)", function() {
             var callback = getWiringCallback('input');
             callback('{"config":{"bars":{"show":true,"horizontal":false,"shadowSize":0,"barWidth":0.5},"mouse":{"track":true,"relative":true},"yaxis":{"min":0,"autoscaleMargin":1}}}');
             callback('{"datasets":{"0":{"label":"Dataset 1"},"1":{"label":"Dataset 2"}}}');
@@ -121,7 +121,7 @@
             expect(widget.loadLayer.classList.contains('on')).toBe(false);
         });
 
-        it("checks that reset the data", function() {
+        it("checks that the data are reset", function() {
             widget.data = [1,2];
             var callback = getWiringCallback('input');
             callback('"RESET"');
