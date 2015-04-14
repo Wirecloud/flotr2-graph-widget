@@ -16,6 +16,7 @@
 
 /*global $, Flotr*/
 
+
 (function () {
 
     "use strict";
@@ -71,13 +72,13 @@
             expect(MashupPlatform.widget.context.registerCallback).toHaveBeenCalledWith(jasmine.any(Function));
         });
 
-        it("redraw on vertical resizes", function () {
+        it("redraw the graph container when the vertical is resized", function () {
             var pref_callback = MashupPlatform.widget.context.registerCallback.calls.argsFor(0)[0];
             pref_callback({"heightInPixels": 100});
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("redraw on horizontal resizes", function () {
+        it("redraw the graph container when the horizontal is resized", function () {
             var pref_callback = MashupPlatform.widget.context.registerCallback.calls.argsFor(0)[0];
             pref_callback({"widthInPixels": 100});
             expect(Flotr.draw).toHaveBeenCalled();
@@ -89,19 +90,19 @@
             expect(Flotr.draw).not.toHaveBeenCalled();
         });
 
-        it("handles correctly events comming from the input endpoint (basic data)", function() {
+        it("handles events comming from the input endpoint (basic data)", function() {
             var callback = getWiringCallback('input');
             callback('{"config":{"selection":{"mode":"x","fps":30},"yaxis":{"min":0,"autoscaleMargin":1}},"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("handles correctly events comming from the input endpoint (using datasets)", function() {
+        it("handles events comming from the input endpoint (using datasets)", function() {
             var callback = getWiringCallback('input');
             callback('{"config":{"bars":{"show":true,"horizontal":false,"shadowSize":0,"barWidth":0.5},"mouse":{"track":true,"relative":true},"yaxis":{"min":0,"autoscaleMargin":1}},"datasets":{"0":{"label":"Dataset 1"},"1":{"label":"Dataset 2"}},"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("handles correctly events comming from the input endpoint (passing config, datasets and data by separately)", function() {
+        it("handles events comming from the input endpoint (passing config, datasets and data by separately)", function() {
             var callback = getWiringCallback('input');
             callback('{"config":{"bars":{"show":true,"horizontal":false,"shadowSize":0,"barWidth":0.5},"mouse":{"track":true,"relative":true},"yaxis":{"min":0,"autoscaleMargin":1}}}');
             callback('{"datasets":{"0":{"label":"Dataset 1"},"1":{"label":"Dataset 2"}}}');

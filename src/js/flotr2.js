@@ -37,10 +37,15 @@
 
 /*global Flotr, MashupPlatform*/
 
+
 window.Widget = (function () {
 
     "use strict";
 
+    /**
+     * Create a new instance of class Widget.
+     * @class
+     */
     var Widget = function Widget() {
         this.data = [];
         this.graphContainer = null;
@@ -66,74 +71,12 @@ window.Widget = (function () {
             }
         }.bind(this));
 
-        // Input handler
-        MashupPlatform.wiring.registerCallback('input', this.process_input.bind(this));
+        MashupPlatform.wiring.registerCallback('input', this.handler_onreceiveGraphInfo.bind(this));
     };
 
-    Widget.prototype.process_input = function process_input(input) {
-        var info;
-
-        info = JSON.parse(input);
-
-        if (typeof info == 'string') {
-            // Loading msg
-            switch (info) {
-            case 'START':
-                // init loading mode
-                this.loadLayer.classList.add('on');
-                break;
-            case 'END':
-                // exit loading mode
-                this.loadLayer.classList.remove('on');
-                break;
-            case 'RESET':
-                this.data = [];
-                break;
-            }
-            return;
-        }
-
-        if ('config' in info) {
-            this.process_config(info.config);
-        }
-
-        if ('datasets' in info) {
-            this.process_new_datasets(info.datasets);
-        }
-
-        if ('data' in info) {
-            this.process_new_data(info.data);
-        }
-    };
-
-    Widget.prototype.process_config = function process_config(new_config) {
-        this.original_config = new_config;
-        this.current_config = Flotr._.clone(new_config);
-        this.data = [];
-    };
-
-    Widget.prototype.process_new_datasets = function process_new_datasets(new_datasets) {
-        for (var key in new_datasets) {
-            this.data[key] = new_datasets[key];
-            this.data[key].data = [];
-        }
-    };
-
-    Widget.prototype.process_new_data = function process_new_data(new_data) {
-        for (var key in new_data) {
-            if (!(key in this.data)) {
-                this.data[key] = {data: new_data[key]};
-            } else {
-                this.data[key].data = this.data[key].data.concat(new_data[key]);
-            }
-        }
-
-        this.draw_graph();
-    };
-
-    Widget.prototype.draw_graph = function draw_graph() {
-        Flotr.draw(this.graphContainer, this.data, this.current_config);
-    };
+    /* ==================================================================================
+     *  PUBLIC METHODS
+     * ================================================================================== */
 
     Widget.prototype.init = function init() {
         // Resize the linearGraphContainer
@@ -157,6 +100,70 @@ window.Widget = (function () {
             this.current_config = Flotr._.clone(this.original_config);
             this.draw_graph();
         }.bind(this));
+    };
+
+    Widget.prototype.handler_onreceiveGraphInfo = function handler_onreceiveGraphInfo(graphInfoString) {
+        var graphInfo = JSON.parse(graphInfoString);
+
+        if (typeof graphInfo == 'string') {
+            // Loading msg
+            switch (graphInfo) {
+            case 'START':
+                // init loading mode
+                this.loadLayer.classList.add('on');
+                break;
+            case 'END':
+                // exit loading mode
+                this.loadLayer.classList.remove('on');
+                break;
+            case 'RESET':
+                this.data = [];
+                break;
+            }
+            return;
+        }
+
+        if ('config' in graphInfo) {
+            this.handler_config(graphInfo.config);
+        }
+
+        if ('datasets' in graphInfo) {
+            this.handler_new_datasets(graphInfo.datasets);
+        }
+
+        if ('data' in graphInfo) {
+            this.handler_new_data(graphInfo.data);
+        }
+
+    };
+
+    Widget.prototype.handler_config = function handler_config(new_config) {
+        this.original_config = new_config;
+        this.current_config = Flotr._.clone(new_config);
+        this.data = [];
+    };
+
+    Widget.prototype.handler_new_datasets = function handler_new_datasets(new_datasets) {
+        for (var key in new_datasets) {
+            this.data[key] = new_datasets[key];
+            this.data[key].data = [];
+        }
+    };
+
+    Widget.prototype.handler_new_data = function handler_new_data(new_data) {
+        for (var key in new_data) {
+            if (!(key in this.data)) {
+                this.data[key] = {data: new_data[key]};
+            } else {
+                this.data[key].data = this.data[key].data.concat(new_data[key]);
+            }
+        }
+
+        this.draw_graph();
+    };
+
+    Widget.prototype.draw_graph = function draw_graph() {
+        Flotr.draw(this.graphContainer, this.data, this.current_config);
     };
 
     return Widget;
