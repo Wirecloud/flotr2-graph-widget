@@ -112,9 +112,17 @@ module.exports = function (grunt) {
         },
 
         jscs: {
-            src: 'src/js/**/*',
-            options: {
-                config: ".jscsrc"
+            widget: {
+                src: 'src/js/**/*',
+                options: {
+                    config: ".jscsrc"
+                }
+            },
+            grunt: {
+                src: 'Gruntfile.js',
+                options: {
+                    config: ".jscsrc"
+                }
             }
         },
 
@@ -146,39 +154,41 @@ module.exports = function (grunt) {
         },
 
         jasmine: {
-          test: {
-            src: ['src/js/*.js', '!src/js/main.js'],
-            options: {
-              specs: 'src/test/js/*Spec.js',
-              helpers: ['src/test/helpers/*.js'],
-              vendor: ['bower_components/jquery/dist/jquery.js',
-                'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-                'bower_components/flotr2/flotr2.js',
-                'src/test/vendor/*.js']
-            }
-          },
-
-          coverage: {
-            summary: true,
-            junit: {
-              path: 'junit'
+            test: {
+                src: ['src/js/*.js', '!src/js/main.js'],
+                options: {
+                    specs: 'src/test/js/*Spec.js',
+                    helpers: ['src/test/helpers/*.js'],
+                    vendor: [
+                        'bower_components/jquery/dist/jquery.js',
+                        'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+                        'bower_components/flotr2/flotr2.js',
+                        'src/test/vendor/*.js'
+                    ]
+                }
             },
-            src: '<%= jasmine.test.src %>',
-            options: {
-              helpers: '<%= jasmine.test.options.helpers %>',
-              specs: '<%= jasmine.test.options.specs %>',
-              vendor: '<%= jasmine.test.options.vendor %>',
-              template: require('grunt-template-jasmine-istanbul'),
-              templateOptions : {
-                coverage: 'build/coverage/json/coverage.json',
-                report: [
-                  {type: 'html', options: {dir: 'build/coverage/html'}},
-                  {type: 'cobertura', options: {dir: 'build/coverage/xml'}},
-                  {type: 'text-summary'}
-                ]
-              }
+
+            coverage: {
+                summary: true,
+                junit: {
+                    path: 'junit'
+                },
+                src: '<%= jasmine.test.src %>',
+                options: {
+                    helpers: '<%= jasmine.test.options.helpers %>',
+                    specs: '<%= jasmine.test.options.specs %>',
+                    vendor: '<%= jasmine.test.options.vendor %>',
+                    template: require('grunt-template-jasmine-istanbul'),
+                    templateOptions: {
+                        coverage: 'build/coverage/json/coverage.json',
+                        report: [
+                            {type: 'html', options: {dir: 'build/coverage/html'}},
+                            {type: 'cobertura', options: {dir: 'build/coverage/xml'}},
+                            {type: 'text-summary'}
+                        ]
+                    }
+                }
             }
-          }
         },
 
     });
