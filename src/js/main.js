@@ -35,14 +35,14 @@
  *
  */
 
-/*global $, Widget */
+/* global Widget */
 
 
-$(function () {
+(function () {
 
     "use strict";
 
     var wgt = new Widget();
     wgt.init();
 
-});
+})();
