@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global $, Flotr*/
+/*global $, Flotr, MockMP */
 
 
 (function () {
@@ -45,14 +45,14 @@
         return null;
     };
 
+    window.MashupPlatform = new MockMP.MockMP();
+
     describe("Flotr2 widget", function () {
 
         var widget = null;
 
         beforeEach(function () {
             loadFixtures('index.html');
-            MashupPlatform.widget.context.registerCallback.calls.reset();
-            MashupPlatform.wiring.registerCallback.calls.reset();
 
             widget = new Widget();
             widget.init();
@@ -61,6 +61,7 @@
         });
 
         afterEach(function () {
+            MashupPlatform.reset();
             clearDocument();
         });
 
