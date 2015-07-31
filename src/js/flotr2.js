@@ -124,17 +124,28 @@ window.Widget = (function () {
         }
 
         if ('config' in graphInfo) {
-            this.handler_config(graphInfo.config);
-        }
+            if (graphInfo.config.lines || graphInfo.config.radar || graphInfo.config.bars || graphInfo.config.bubbles || graphInfo.config.pie) {
+                this.handler_config(graphInfo.config);
 
-        if ('datasets' in graphInfo) {
-            this.handler_new_datasets(graphInfo.datasets);
-        }
+                if ('datasets' in graphInfo) {
+                    this.handler_new_datasets(graphInfo.datasets);
+                }
 
-        if ('data' in graphInfo) {
-            this.handler_new_data(graphInfo.data);
-        }
+                if ('data' in graphInfo) {
+                    this.handler_new_data(graphInfo.data);
+                }
 
+            } else {
+                this.data = [];
+
+                /*var div = document.createElement('div');
+                this.graphContainer.appendChild(div);
+                var p = document.createElement('p');
+                div.appendChild(p);
+                var message = document.createTextNode("Prueba");
+                p.appendChild(message);*/
+            }
+        }
     };
 
     Widget.prototype.handler_config = function handler_config(new_config) {

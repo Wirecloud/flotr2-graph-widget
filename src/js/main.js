@@ -37,12 +37,10 @@
 
 /* global Widget */
 
-
-(function () {
+window.onload = function () {
 
     "use strict";
 
-    var wgt = new Widget();
-    wgt.init();
-
-})();
+    var widget = new Widget();
+    widget.init();
+};
