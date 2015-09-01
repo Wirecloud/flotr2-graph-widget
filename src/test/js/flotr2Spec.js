@@ -94,6 +94,8 @@
         it("handles events comming from the input endpoint (basic data)", function() {
             var callback = getWiringCallback('input');
             callback('{"config":{"selection":{"mode":"x","fps":30},"yaxis":{"min":0,"autoscaleMargin":1}},"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
+            widget.handler_config();
+            widget.handler_new_data();
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
@@ -105,9 +107,12 @@
 
         it("handles events comming from the input endpoint (passing config, datasets and data by separately)", function() {
             var callback = getWiringCallback('input');
-            callback('{"config":{"bars":{"show":true,"horizontal":false,"shadowSize":0,"barWidth":0.5},"mouse":{"track":true,"relative":true},"yaxis":{"min":0,"autoscaleMargin":1}}}');
-            callback('{"datasets":{"0":{"label":"Dataset 1"},"1":{"label":"Dataset 2"}}}');
-            callback('{"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
+            callback('{"config":{"pie":{"show":true,"explode":6},"mouse":{"track":true}}}');
+            widget.handler_config();
+            callback('{"datasets":{"0":{"label":"Work"},"1":{"label":"Eat"},"2":{"label":"Commute"},"3":{"label":"Watch TV"},"4":{"label":"Sleep"}}}');
+            widget.handler_new_datasets();
+            callback('{"data":{"0":[[11]],"1":[[2]],"2":[[2]],"3":[[2]],"4":[[7]]}}');
+            widget.handler_new_data();
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
