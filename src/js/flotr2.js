@@ -137,13 +137,6 @@ window.Widget = (function () {
 
             } else {
                 this.data = [];
-
-                /*var div = document.createElement('div');
-                this.graphContainer.appendChild(div);
-                var p = document.createElement('p');
-                div.appendChild(p);
-                var message = document.createTextNode("Prueba");
-                p.appendChild(message);*/
             }
         }
     };
