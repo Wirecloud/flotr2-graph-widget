@@ -37,7 +37,6 @@
 
 /*global Flotr, MashupPlatform*/
 
-
 window.Widget = (function () {
 
     "use strict";

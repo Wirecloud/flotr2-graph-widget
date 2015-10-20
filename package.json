@@ -1,7 +1,7 @@
 {
   "vendor": "CoNWeT",
   "name": "flotr2-graph-widget",
-  "version": "0.98.2",
+  "version": "1.0.0",
   "description": "Wirecloud widget allows you to create any graph supported by flotr2",
   "repository": {
     "type": "git",
