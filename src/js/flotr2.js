@@ -35,7 +35,7 @@
  *
  */
 
-/*global Flotr, MashupPlatform*/
+/* global Flotr, MashupPlatform*/
 
 window.Widget = (function () {
 

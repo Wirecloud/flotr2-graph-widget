@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global $, Flotr, MockMP */
+/* globals $, Flotr, MockMP, loadFixtures, Widget */
 
 
 (function () {
@@ -85,13 +85,13 @@
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("does nothing on eventual context changes", function() {
+        it("does nothing on eventual context changes", function () {
             var pref_callback = MashupPlatform.widget.context.registerCallback.calls.argsFor(0)[0];
             pref_callback({"name": "new name"});
             expect(Flotr.draw).not.toHaveBeenCalled();
         });
 
-        it("handles events comming from the input endpoint (basic data)", function() {
+        it("handles events comming from the input endpoint (basic data)", function () {
             var callback = getWiringCallback('input');
             callback('{"config":{"selection":{"mode":"x","fps":30},"yaxis":{"min":0,"autoscaleMargin":1}},"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
             widget.handler_config();
@@ -99,13 +99,13 @@
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("handles events comming from the input endpoint (using datasets)", function() {
+        it("handles events comming from the input endpoint (using datasets)", function () {
             var callback = getWiringCallback('input');
             callback('{"config":{"bars":{"show":true,"horizontal":false,"shadowSize":0,"barWidth":0.5},"mouse":{"track":true,"relative":true},"yaxis":{"min":0,"autoscaleMargin":1}},"datasets":{"0":{"label":"Dataset 1"},"1":{"label":"Dataset 2"}},"data":{"0":[[0,6],[1,10],[2,3],[3,9]],"1":[[0.5,8],[1.5,10],[2.5,2],[3.5,10]]}}');
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("handles events comming from the input endpoint (passing config, datasets and data by separately)", function() {
+        it("handles events comming from the input endpoint (passing config, datasets and data by separately)", function () {
             var callback = getWiringCallback('input');
             callback('{"config":{"pie":{"show":true,"explode":6},"mouse":{"track":true}}}');
             widget.handler_config();
@@ -116,19 +116,19 @@
             expect(Flotr.draw).toHaveBeenCalled();
         });
 
-        it("checks init loading mode", function() {
+        it("checks init loading mode", function () {
             var callback = getWiringCallback('input');
             callback('"START"');
             expect(widget.loadLayer.classList.contains('on')).toBe(true);
         });
 
-        it("checks exit loading mode", function() {
+        it("checks exit loading mode", function () {
             var callback = getWiringCallback('input');
             callback('"END"');
             expect(widget.loadLayer.classList.contains('on')).toBe(false);
         });
 
-        it("checks that the data are reset", function() {
+        it("checks that the data are reset", function () {
             widget.data = [1,2];
             var callback = getWiringCallback('input');
             callback('"RESET"');

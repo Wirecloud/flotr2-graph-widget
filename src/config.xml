@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="flotr2-graph" version="1.0.0">
+<widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="flotr2-graph" version="">
     <details>
         <title>Flotr2 Graph</title>
         <authors>Álvaro Arranz &lt;aarranz@conwet.com&gt;</authors>

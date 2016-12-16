@@ -1,4 +1,4 @@
-/*!
+/*
  *   Copyright 2014-2015 CoNWeT Lab., Universidad Politecnica de Madrid
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -112,45 +112,21 @@ module.exports = function (grunt) {
             }
         },
 
-        jscs: {
+        eslint: {
             widget: {
-                src: 'src/js/**/*',
-                options: {
-                    config: ".jscsrc"
-                }
-            },
-            grunt: {
-                src: 'Gruntfile.js',
-                options: {
-                    config: ".jscsrc"
-                }
-            }
-        },
-
-        jshint: {
-            options: {
-                jshintrc: true
-            },
-            all: {
-                files: {
-                    src: ['src/js/**/*.js']
-                }
+                src: 'src/js/**/*.js'
             },
             grunt: {
                 options: {
-                    jshintrc: '.jshintrc-node'
+                    configFile: '.eslintrc-node'
                 },
-                files: {
-                    src: ['Gruntfile.js']
-                }
+                src: 'Gruntfile.js',
             },
             test: {
                 options: {
-                    jshintrc: '.jshintrc-jasmine'
+                    configFile: '.eslintrc-jasmine'
                 },
-                files: {
-                    src: ['src/test/**/*.js', '!src/test/fixtures/']
-                }
+                src: ['src/test/**/*.js', '!src/test/fixtures/']
             }
         },
 
@@ -191,25 +167,39 @@ module.exports = function (grunt) {
                     }
                 }
             }
+        },
+
+        wirecloud: {
+            options: {
+                overwrite: false
+            },
+            publish: {
+                file: 'dist/<%= metadata.vendor %>_<%= metadata.name %>_<%= metadata.version %><%= isDev %>.wgt'
+            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-wirecloud');
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-contrib-jasmine'); // when test?
+    grunt.loadNpmTasks('gruntify-eslint');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks("grunt-jscs");
     grunt.loadNpmTasks('grunt-strip-code');
     grunt.loadNpmTasks('grunt-text-replace');
 
     grunt.registerTask('test', [
         'bower:install',
-        'jshint:grunt',
-        'jshint',
-        'jscs',
+        'eslint',
         'jasmine:coverage'
+    ]);
+
+    grunt.registerTask('build', [
+        'clean:temp',
+        'copy:main',
+        'strip_code',
+        'compress:widget'
     ]);
 
     grunt.registerTask('default', [
@@ -219,6 +209,11 @@ module.exports = function (grunt) {
         'strip_code',
         'replace:version',
         'compress:widget'
+    ]);
+
+    grunt.registerTask('publish', [
+        'default',
+        'wirecloud'
     ]);
 
 };
